@@ -8,7 +8,7 @@ from blog_utils import timeit, print_timeit, print_timeit_table
 
 
 
-def create_code_strings():
+def main():
     """ Create list of text strings that are the snippets of code
     to be run against timeit
     """
@@ -17,7 +17,7 @@ def create_code_strings():
     
     numbers = (1, 8, 13, int(2**31-1), int(2**31))
     float_nums = [float(n) for n in numbers]
-    operators = ('+', '-', '*', '/', '%')
+    operators = ('+', '-', '*', '/', '%', '>', '<', '>=', '==')
     code_strings = [base_string.format(n, op, m) for n in numbers
                                                  for op in operators
                                                  for m in numbers]
@@ -39,12 +39,6 @@ def create_code_strings():
     code_strings += ['{0}*1.'.format(n) for n in numbers]
     code_strings += ['int({0})'.format(n) for n in float_nums]
 
-    return code_strings
-
-
-def main():
-
-    code_strings = create_code_strings()
 
     print_timeit_table(code_strings)
 
